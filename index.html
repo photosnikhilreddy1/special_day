@@ -4,21 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Special Day</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
-
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+* {margin:0; padding:0; box-sizing:border-box;}
 
 body {
-  font-family: 'Roboto', sans-serif;
-  background: #111;
-  color: #fff;
-  overflow-x: hidden;
+  font-family:'Roboto', sans-serif;
+  background:#111;
+  color:#fff;
+  overflow-x:hidden;
 }
 
 /* Floating hearts */
@@ -29,136 +23,113 @@ body {
   animation: float 20s linear infinite;
   pointer-events: none;
 }
-
 @keyframes float {
-  0% {
-    transform: translateY(100vh);
-    opacity: 0.3;
-  }
-  100% {
-    transform: translateY(-100vh);
-    opacity: 0.8;
-  }
+  0% {transform: translateY(100vh); opacity:0.3;}
+  100% {transform: translateY(-100vh); opacity:0.8;}
 }
 
 /* Container */
 .container {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 40px 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 60px;
+  max-width:900px;
+  margin:0 auto;
+  padding:40px 20px;
+  display:flex;
+  flex-direction:column;
+  gap:60px;
 }
 
 /* Event block */
 .event-block {
-  position: relative;
-  padding: 50px 30px;
-  border-radius: 15px;
-  min-height: 90vh;
-  opacity: 0;
+  position:relative;
+  padding:50px 30px;
+  border-radius:15px;
+  min-height:90vh;
+  opacity:0;
   transform: translateY(40px);
   transition: all 0.8s ease;
 }
-
 .event-block.visible {
-  opacity: 1;
+  opacity:1;
   transform: translateY(0);
 }
+.event-block:nth-child(even):not(.first-last) {background:#1a1a1a;}
+.event-block:nth-child(odd):not(.first-last) {background:#222;}
 
-.event-block:nth-child(even):not(.first-last) {
-  background: #1a1a1a;
-}
-
-.event-block:nth-child(odd):not(.first-last) {
-  background: #222;
-}
-
-/* First & Last page */
+/* First & Last Page */
 .event-block.first-last {
-  background: #ff577f;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  background:#ff577f;
+  text-align:center;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  position:relative;
+  overflow:hidden;
 }
 
 /* Background image */
 .event-block.first-last::before {
-  content: "";
-  position: absolute;
-  inset: 0;
+  content:"";
+  position:absolute;
+  inset:0;
   background: url("bg.jpg") center / cover no-repeat;
-  opacity: 0.25;
-  z-index: 0;
+  opacity:0.25;
+  z-index:0;
+  pointer-events:none;
 }
 
+/* Make content above background */
 .event-block.first-last * {
-  position: relative;
-  z-index: 1;
+  position:relative;
+  z-index:1;
 }
 
 /* Typography */
 .event-block h1 {
-  font-size: 40px;
-  margin-bottom: 25px;
+  font-size:40px;
+  margin-bottom:25px;
 }
-
 .event-block h2 {
-  font-family: 'Playfair Display', serif;
-  margin-bottom: 20px;
+  font-family:'Playfair Display', serif;
+  margin-bottom:20px;
 }
-
 .event-title {
-  color: #ff577f;
-  text-decoration: underline;
-  font-size: 30px;
+  color:#ff577f;
+  text-decoration:underline;
+  font-size:30px;
 }
-
 .event-date {
-  font-size: 16px;
-  margin-left: 10px;
+  font-size:16px;
+  margin-left:10px;
 }
-
-.poetry {
-  font-size: 18px;
-  line-height: 1.7;
-}
-
-.stanza p {
-  visibility: hidden;
-  margin-bottom: 6px;
-}
+.poetry {font-size:18px; line-height:1.7;}
+.stanza p {visibility:hidden; margin-bottom:6px;}
 
 /* Scroll indicator */
 .scroll-indicator {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 22px;
-  opacity: 0.7;
-  animation: bounce 1.5s infinite;
+  position:absolute;
+  bottom:20px;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:22px;
+  opacity:0.7;
+  animation:bounce 1.5s infinite;
 }
-
 @keyframes bounce {
-  0%, 100% { transform: translate(-50%, 0); }
-  50% { transform: translate(-50%, 10px); }
+  0%,100%{transform:translate(-50%,0);}
+  50%{transform:translate(-50%,10px);}
 }
 </style>
 </head>
-
 <body>
 
 <!-- Floating hearts -->
 <script>
-for (let i = 0; i < 15; i++) {
-  const e = document.createElement("div");
-  e.className = "emoji";
-  e.style.left = Math.random() * 100 + "vw";
-  e.style.animationDuration = (15 + Math.random() * 10) + "s";
-  e.innerHTML = "❤️";
+for(let i=0;i<15;i++){
+  let e=document.createElement("div");
+  e.className="emoji";
+  e.style.left=Math.random()*100+"vw";
+  e.style.animationDuration=(15+Math.random()*10)+"s";
+  e.innerHTML="❤️";
   document.body.appendChild(e);
 }
 </script>
@@ -168,26 +139,21 @@ for (let i = 0; i < 15; i++) {
 <!-- FIRST PAGE -->
 <div class="event-block first-last">
   <h1>Happy Birthday Indhu ❤️</h1>
-
   <p>You are cherished, truly special,</p>
   <p>A spark in our everyday moments.</p>
   <p>Every memory, every laugh, every stolen glance is so special</p>
   <p>May every visit remind you of the joy you bring.</p>
-
   <div class="scroll-indicator">⬇️</div>
 </div>
 
 <!-- FIRST EVENT -->
 <div class="event-block">
   <h2>
-    <a class="event-title"
-       href="https://maps.app.goo.gl/y1ua36iZJ3gJsMLZ8"
-       target="_blank">
-      First Date – Windmill Whispers
+    <a class="event-title" href="https://maps.app.goo.gl/y1ua36iZJ3gJsMLZ8" target="_blank">
+      First Date - Windmill Whispers
     </a>
     <span class="event-date">20 June</span>
   </h2>
-
   <div class="poetry">
     <div class="stanza">
       <p>A windmill turning slow.</p>
@@ -196,26 +162,24 @@ for (let i = 0; i < 15; i++) {
       <p>A comfort I didn’t expect.</p>
       <p>A spark I didn’t understand yet.</p>
     </div>
-
     <div class="stanza">
       <p>The bike ride after—</p>
       <p>cool air, soft silence, shared space.</p>
       <p>Your hand on my shoulder—warm, gentle, grounding.</p>
       <p>A touch that stayed in my mind long after.</p>
     </div>
-
     <div class="stanza">
       <p>A tiny beginning.</p>
       <p>A quiet start.</p>
       <p>But it was the start of us.</p>
     </div>
   </div>
+  <div class="scroll-indicator">⬇️</div>
 </div>
 
 <!-- LAST PAGE -->
 <div class="event-block first-last">
   <h1>Forever Us ❤️</h1>
-
   <p>If there’s one truth my heart knows now,</p>
   <p>it’s that you’re the warmth I return to,</p>
   <p>the story I want to keep writing,</p>
@@ -225,41 +189,33 @@ for (let i = 0; i < 15; i++) {
 </div>
 
 <script>
-function typeParagraphSequential(lines, delay = 80, lineDelay = 800) {
-  lines.forEach((p, index) => {
-    p.style.visibility = "visible";
-    const text = p.textContent;
-    p.textContent = "";
-    let i = 0;
-
-    function type() {
-      if (i < text.length) {
-        p.textContent += text[i++];
-        setTimeout(type, delay);
-      }
+function typeParagraphSequential(lines, delay=80, lineDelay=800){
+  lines.forEach((p,index)=>{
+    p.style.visibility="visible";
+    const text=p.textContent;
+    p.textContent="";
+    let i=0;
+    function type(){
+      if(i<text.length){p.textContent+=text[i++]; setTimeout(type,delay);}
     }
-
-    setTimeout(type, index * lineDelay);
+    setTimeout(type,index*lineDelay);
   });
 }
-
-const blocks = document.querySelectorAll(".event-block");
-
-function onScroll() {
-  blocks.forEach(block => {
-    if (!block.classList.contains("visible")) {
-      const top = block.getBoundingClientRect().top;
-      if (top < window.innerHeight * 0.85) {
+const blocks=document.querySelectorAll(".event-block");
+function onScroll(){
+  blocks.forEach(block=>{
+    if(!block.classList.contains("visible")){
+      const top=block.getBoundingClientRect().top;
+      if(top<window.innerHeight*0.85){
         block.classList.add("visible");
-        const lines = block.querySelectorAll(".stanza p");
+        const lines=block.querySelectorAll(".stanza p");
         typeParagraphSequential([...lines]);
       }
     }
   });
 }
-
-window.addEventListener("scroll", onScroll);
-window.addEventListener("load", onScroll);
+window.addEventListener("scroll",onScroll);
+window.addEventListener("load",onScroll);
 </script>
 
 </body>
