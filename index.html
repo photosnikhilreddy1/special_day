@@ -1,279 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Our Love Story</title>
+  <meta charset="UTF-8">
+  <title>Our Special Day</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Playfair+Display:wght@400;700&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: "Georgia", serif;
+      background: #000;
+      color: #fff;
+      overflow-x: hidden;
+    }
 
-<style>
-* { margin:0; padding:0; box-sizing:border-box; }
-body {
-  font-family: 'Roboto', sans-serif;
-  background:#111;
-  color:#fff;
-  overflow-x:hidden;
-}
+    .container {
+      scroll-snap-type: y mandatory;
+      height: 100vh;
+      overflow-y: scroll;
+    }
 
-/* Floating hearts */
-.emoji {
-  position: fixed;
-  font-size: 30px;
-  opacity: 0.7;
-  animation: float 20s linear infinite;
-  pointer-events: none;
-}
-@keyframes float {
-  0% { transform: translateY(100vh) scale(1) rotate(0deg); opacity:0.3; }
-  50% { opacity:0.9; }
-  100% { transform: translateY(-100vh) scale(1.2) rotate(360deg); opacity:0.3; }
-}
+    .event-block {
+      scroll-snap-align: start;
+      min-height: 100vh;
+      padding: 60px 40px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+    }
 
-/* Container */
-.container {
-  max-width:900px;
-  margin:0 auto;
-  padding:50px 20px;
-  display:flex;
-  flex-direction:column;
-  gap:60px;
-}
+    .event-block h1,
+    .event-block h2 {
+      margin-bottom: 20px;
+    }
 
-/* Event Block */
-.event-block {
-  display:flex;
-  flex-direction:column;
-  border-radius:15px;
-  padding:50px 30px;
-  opacity:0;
-  transform: translateY(50px) scale(0.95);
-  transition: all 0.8s ease;
-  min-height: 90vh;
-  position: relative;
-}
+    .event-date {
+      font-size: 14px;
+      opacity: 0.8;
+      margin-left: 10px;
+    }
 
-.event-block.visible {
-  opacity:1;
-  transform: translateY(0) scale(1);
-}
+    .poetry p {
+      margin: 6px 0;
+      line-height: 1.6;
+    }
 
-/* Alternate background */
-.event-block:nth-child(even):not(.first-last) { background:#1a1a1a; }
-.event-block:nth-child(odd):not(.first-last) { background:#222; }
+    .scroll-indicator {
+      position: absolute;
+      bottom: 20px;
+      width: 100%;
+      text-align: center;
+      opacity: 0.7;
+      font-size: 18px;
+    }
 
-/* Event Header */
-.event-block h2 {
-  font-family:'Playfair Display', serif;
-  display:flex;
-  align-items:center;
-  gap:15px;
-  margin-bottom:25px;
-  flex-wrap:wrap;
-}
+    /* First & Last page base style */
+    .event-block.first-last {
+      background: #ff577f;
+      color: #fff;
+      text-align: center;
+      overflow: hidden;
+    }
 
-.event-title {
-  font-size:32px;
-  color:#ff577f;
-  text-decoration:underline;
-}
+    /* Background image for first & last page */
+    .event-block.first-last::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url("background.jpg") center / cover no-repeat;
+      opacity: 0.25;
+      z-index: 0;
+    }
 
-.event-date {
-  font-size:16px;
-  color:#fff;
-}
+    /* Keep text above image */
+    .event-block.first-last * {
+      position: relative;
+      z-index: 1;
+    }
 
-/* Poetry */
-.poetry {
-  font-size:18px;
-  line-height:1.6;
-  color:#eee;
-}
-.stanza { margin-bottom:40px; }
-.stanza p { margin-bottom:5px; visibility:hidden; }
+    a.event-title {
+      color: #ffd6e0;
+      text-decoration: none;
+    }
 
-/* Scroll indicator */
-.scroll-indicator {
-  position:absolute;
-  bottom:20px;
-  left:50%;
-  transform:translateX(-50%);
-  font-size:24px;
-  opacity:0.6;
-  animation:bounce 1.5s infinite;
-}
-@keyframes bounce {
-  0%,100% { transform:translate(-50%,0); }
-  50% { transform:translate(-50%,10px); }
-}
+    a.event-title:hover {
+      text-decoration: underline;
+    }
 
-/* First & Last Page */
-.event-block.first-last {
-  background:#ff577f;
-  color:#fff;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-}
-
-.event-block.first-last .event-title {
-  font-family:'Dancing Script', cursive;
-  font-size:48px;
-  text-decoration:none;
-  color:black;
-}
-
-/* Beer glasses */
-.beer-glass {
-  font-size:50px;
-  animation: toast 2s ease-in-out infinite alternate;
-}
-@keyframes toast {
-  0% { transform:translateY(0) rotate(0deg); }
-  50% { transform:translateY(-15px) rotate(-10deg); }
-  100% { transform:translateY(0) rotate(10deg); }
-}
-</style>
+    @media (max-width: 600px) {
+      .event-block {
+        padding: 40px 20px;
+      }
+    }
+  </style>
 </head>
 
 <body>
+  <div class="container">
 
-<!-- Floating hearts -->
-<script>
-for (let i = 0; i < 15; i++) {
-  const e = document.createElement("div");
-  e.className = "emoji";
-  e.style.left = Math.random() * 100 + "vw";
-  e.style.animationDuration = (15 + Math.random() * 10) + "s";
-  e.innerHTML = "❤️";
-  document.body.appendChild(e);
-}
-</script>
-
-<div class="container">
-
-<!-- First Page -->
-<div class="event-block first-last">
-  <h2>
-    <span class="beer-glass">🍻</span>
-    <span class="event-title">Happy Birthday Sushma!</span>
-    <span class="beer-glass">🍻</span>
-  </h2>
-
-  <div class="poetry">
-    <div class="stanza">
-      <p>You are cherished, truly special,</p>
-      <p>A spark in our everyday moments.</p>
-      <p>Every memory, every laugh, every stolen glance</p>
-      <p>Lives here, captured below—</p>
-      <p>Take your time, reread, and relive each beat.</p>
-      <p>May every visit remind you of the joy you bring.</p>
-    </div>
-  </div>
-
-  <div class="scroll-indicator">⬇️</div>
-</div>
-
-<!-- Event 1 ONLY -->
-<div class="event-block">
-  <h2>
-    <a class="event-title" href="https://maps.app.goo.gl/y1ua36iZJ3gJsMLZ8" target="_blank">
-      First Date - Windmill Whispers
-    </a>
-    <span class="event-date">20 June</span>
-  </h2>
-
-  <div class="poetry">
-
-    <div class="stanza">
-      <p>A windmill turning slow.</p>
-      <p>Our first beer.</p>
-      <p>Your eyes speaking quietly to mine.</p>
-      <p>A comfort I didn’t expect.</p>
-      <p>A spark I didn’t understand yet.</p>
+    <!-- First Page -->
+    <div class="event-block first-last">
+      <h1>Happy Birthday Indhu ❤️</h1>
+      <p>A small journey through our beginning</p>
+      <div class="scroll-indicator">⬇️</div>
     </div>
 
-    <div class="stanza">
-      <p>The bike ride after—</p>
-      <p>cool air, soft silence, shared space.</p>
-      <p>Your hand on my shoulder—warm, gentle, grounding.</p>
-      <p>A touch that stayed in my mind long after.</p>
-    </div>
+    <!-- First Event -->
+    <div class="event-block">
+      <h2>
+        <a class="event-title" href="https://maps.app.goo.gl/y1ua36iZJ3gJsMLZ8" target="_blank">
+          First Date – Windmill Whispers
+        </a>
+        <span class="event-date">20 June</span>
+      </h2>
 
-    <div class="stanza">
-      <p>And somewhere inside,</p>
-      <p>a small wish began—</p>
-      <p>a simple side hug, someday.</p>
-    </div>
+      <div class="poetry">
+        <p>A windmill turning slow.</p>
+        <p>Our first beer.</p>
+        <p>Your eyes speaking quietly to mine.</p>
+        <p>A comfort I didn’t expect.</p>
+        <p>A spark I didn’t understand yet.</p>
 
-    <div class="stanza">
-      <p>A tiny beginning.</p>
-      <p>A quiet start.</p>
-      <p>But it was the start of us.</p>
-    </div>
+        <p>The bike ride after—</p>
+        <p>cool air, soft silence, shared space.</p>
+        <p>Your hand on my shoulder—warm, gentle, grounding.</p>
+        <p>A touch that stayed in my mind long after.</p>
 
-  </div>
-
-  <div class="scroll-indicator">⬇️</div>
-</div>
-
-<!-- Last Page -->
-<div class="event-block first-last">
-  <h2>
-    <span class="beer-glass">🍻</span>
-    <span class="event-title">Forever Us</span>
-    <span class="beer-glass">🍻</span>
-  </h2>
-
-  <div class="poetry">
-    <div class="stanza">
-      <p>If there’s one truth my heart knows now,</p>
-      <p>it’s that you’re the warmth I return to,</p>
-      <p>again, again, and always.</p>
-    </div>
-  </div>
-</div>
-
-</div>
-
-<script>
-function typeParagraphSequential(lines, delay=80, lineDelay=800) {
-  lines.forEach(function(p, index) {
-    p.style.visibility = "visible";
-    const text = p.textContent;
-    p.textContent = "";
-    let i = 0;
-
-    function typing() {
-      if (i < text.length) {
-        p.textContent += text[i];
-        i++;
-        setTimeout(typing, delay);
-      }
-    }
-
-    setTimeout(typing, index * lineDelay);
-  });
-}
-
-const blocks = document.querySelectorAll(".event-block");
-
-function handleScroll() {
-  blocks.forEach(function(block) {
-    if (!block.classList.contains("visible")) {
-      const top = block.getBoundingClientRect().top;
-      if (top < window.innerHeight * 0.85) {
-        block.classList.add("visible");
-        const lines = block.querySelectorAll(".stanza p");
-        typeParagraphSequential(Array.from(lines));
-      }
-    }
-  });
-}
-
-window.addEventListener("scroll", handleScroll);
-window.addEventListener("load", handleScroll);
-</script>
-
-</body>
-</html>
+        <p>And somewhere inside,</p>
+        <p>a
