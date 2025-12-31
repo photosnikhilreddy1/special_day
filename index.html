@@ -4,28 +4,39 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Our Special Day</title>
-
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
-body { font-family: "Georgia", serif; background: #000; color:#fff; overflow-x:hidden; }
 
-/* Container */
-.container { scroll-snap-type: y mandatory; height:100vh; overflow-y: scroll; }
+body {
+  font-family: "Georgia", serif;
+  background:#000;
+  color:#fff;
+  overflow-x:hidden;
+}
+
+/* Container scroll */
+.container {
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+  height: 100vh;
+}
 
 /* Event block */
 .event-block {
   scroll-snap-align: start;
-  min-height: 100vh;
-  padding: 60px 40px;
+  min-height:100vh;
   display:flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   position: relative;
+  padding:60px 40px;
+  box-sizing:border-box;
 }
 .event-block h1,
-.event-block h2 { margin-bottom:20px; }
+.event-block h2 { margin-bottom:20px; text-align:center; }
 .event-date { font-size:14px; opacity:0.8; margin-left:10px; }
-.poetry p { margin:6px 0; line-height:1.6; }
+.poetry p { margin:6px 0; line-height:1.6; text-align:center; }
 
 /* Scroll indicator */
 .scroll-indicator {
@@ -40,19 +51,18 @@ body { font-family: "Georgia", serif; background: #000; color:#fff; overflow-x:h
 /* First & Last Page */
 .event-block.first-last {
   background:#ff577f;
-  color:#fff;
-  text-align:center;
   overflow:hidden;
+  position:relative;
 }
 
 /* Background image with 125% zoom */
 .event-block.first-last::before {
-  content: "";
-  position: absolute;
-  inset: 0;
+  content:"";
+  position:absolute;
+  inset:0;
   background: url("background.jpg") center / 125% auto no-repeat;
-  opacity: 0.25;
-  z-index: 0;
+  opacity:0.25;
+  z-index:0;
 }
 
 /* Keep text above background */
@@ -83,12 +93,10 @@ for(let i=0;i<15;i++){
   <!-- FIRST PAGE -->
   <div class="event-block first-last">
     <h1>Happy Birthday Indhu ❤️</h1>
-
     <p>You are cherished, truly special,</p>
     <p>A spark in our everyday moments.</p>
     <p>Every memory, every laugh, every stolen glance is so special</p>
     <p>May every visit remind you of the joy you bring.</p>
-
     <div class="scroll-indicator">⬇️</div>
   </div>
 
@@ -100,7 +108,6 @@ for(let i=0;i<15;i++){
       </a>
       <span class="event-date">20 June</span>
     </h2>
-
     <div class="poetry">
       <p>A windmill turning slow.</p>
       <p>Our first beer.</p>
@@ -121,7 +128,6 @@ for(let i=0;i<15;i++){
       <p>A quiet start.</p>
       <p>But it was the start of us.</p>
     </div>
-
     <div class="scroll-indicator">⬇️</div>
   </div>
 
@@ -135,6 +141,5 @@ for(let i=0;i<15;i++){
   </div>
 
 </div>
-
 </body>
 </html>
