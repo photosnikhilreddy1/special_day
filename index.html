@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Our Special Day</title>
+
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
 
@@ -68,78 +69,9 @@ body {
 /* Keep text above background */
 .event-block.first-last * { position: relative; z-index:1; }
 
-a.event-title { color:#ffd6e0; text-decoration:none; }
-a.event-title:hover { text-decoration: underline; }
-
-@media(max-width:600px){ .event-block { padding:40px 20px; } }
-</style>
-</head>
-<body>
-
-<!-- Floating hearts -->
-<script>
-for(let i=0;i<15;i++){
-  let e=document.createElement("div");
-  e.className="emoji";
-  e.style.left=Math.random()*100+"vw";
-  e.style.animationDuration=(15+Math.random()*10)+"s";
-  e.innerHTML="❤️";
-  document.body.appendChild(e);
-}
-</script>
-
-<div class="container">
-
-  <!-- FIRST PAGE -->
-  <div class="event-block first-last">
-    <h1>Happy Birthday Indhu ❤️</h1>
-    <p>You are cherished, truly special,</p>
-    <p>A spark in our everyday moments.</p>
-    <p>Every memory, every laugh, every stolen glance is so special</p>
-    <p>May every visit remind you of the joy you bring.</p>
-    <div class="scroll-indicator">⬇️</div>
-  </div>
-
-  <!-- FIRST EVENT -->
-  <div class="event-block">
-    <h2>
-      <a class="event-title" href="https://maps.app.goo.gl/y1ua36iZJ3gJsMLZ8" target="_blank">
-        First Date – Windmill Whispers
-      </a>
-      <span class="event-date">20 June</span>
-    </h2>
-    <div class="poetry">
-      <p>A windmill turning slow.</p>
-      <p>Our first beer.</p>
-      <p>Your eyes speaking quietly to mine.</p>
-      <p>A comfort I didn’t expect.</p>
-      <p>A spark I didn’t understand yet.</p>
-
-      <p>The bike ride after—</p>
-      <p>cool air, soft silence, shared space.</p>
-      <p>Your hand on my shoulder—warm, gentle, grounding.</p>
-      <p>A touch that stayed in my mind long after.</p>
-
-      <p>And somewhere inside,</p>
-      <p>a small wish began—</p>
-      <p>a simple side hug, someday.</p>
-
-      <p>A tiny beginning.</p>
-      <p>A quiet start.</p>
-      <p>But it was the start of us.</p>
-    </div>
-    <div class="scroll-indicator">⬇️</div>
-  </div>
-
-  <!-- LAST PAGE -->
-  <div class="event-block first-last">
-    <h1>Forever Us 💞</h1>
-    <p>If there’s one truth my heart knows now,</p>
-    <p>it’s that you’re the warmth I return to,</p>
-    <p>the story I want to keep writing,</p>
-    <p>again, again, and always.</p>
-  </div>
-
-</div>
-</body>
-</html>
+/* Floating hearts */
+.emoji {
+  position: fixed;
+  font-size: 30px;
+  opacity: 0.7;
+  animatio
