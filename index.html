@@ -88,9 +88,74 @@ a.event-title { color:#ffd6e0; text-decoration:none; }
 a.event-title:hover { text-decoration: underline; }
 
 @media(max-width:600px){ .event-block { padding:40px 20px; } }
+
+/* Password screen */
+#password-screen {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.password-box {
+  text-align: center;
+  padding: 30px;
+  border: 1px solid #ffd6e0;
+  border-radius: 12px;
+  background: rgba(0,0,0,0.8);
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from { box-shadow: 0 0 10px rgba(255,214,224,0.4); }
+  to   { box-shadow: 0 0 25px rgba(255,214,224,0.9); }
+}
+
+.password-box h2 {
+  margin-bottom: 15px;
+  color: #ffd6e0;
+}
+
+.password-box input {
+  padding: 10px;
+  font-size: 18px;
+  width: 160px;
+  text-align: center;
+  border-radius: 6px;
+  border: none;
+  outline: none;
+}
+
+.password-box button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background: #ffd6e0;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+#error-msg {
+  color: #ff6b6b;
+  margin-top: 10px;
+}
 </style>
 </head>
 <body>
+
+<!-- Password screen -->
+<div id="password-screen">
+  <div class="password-box">
+    <h2>Only for Indhu 💞</h2>
+    <input type="password" id="passwordInput" maxlength="4" placeholder="4-digit code"/>
+    <button onclick="checkPassword()">Unlock ❤️</button>
+    <p id="error-msg"></p>
+  </div>
+</div>
 
 <!-- Floating hearts -->
 <script>
@@ -104,6 +169,30 @@ for(let i=0;i<15;i++){
 }
 </script>
 
+<!-- Password logic -->
+<script>
+const CORRECT_PASSWORD = "2408"; // change this to your 4-digit code
+
+function checkPassword() {
+  const input = document.getElementById("passwordInput").value;
+  const error = document.getElementById("error-msg");
+  if (input === CORRECT_PASSWORD) {
+    sessionStorage.setItem("unlocked", "yes");
+    document.getElementById("password-screen").style.display = "none";
+  } else {
+    error.textContent = "Wrong code 💔 Try again";
+  }
+}
+
+// Auto-unlock if already entered once
+if (sessionStorage.getItem("unlocked") === "yes") {
+  window.addEventListener("load", () => {
+    document.getElementById("password-screen").style.display = "none";
+  });
+}
+</script>
+
+<!-- Page content -->
 <div class="container">
 
   <!-- First Page -->
@@ -111,7 +200,7 @@ for(let i=0;i<15;i++){
     <h1>Happy Birthday Indhu !! ❤️</h1>
     <p>You are cherished, truly special,</p>
     <p>A spark in our everyday moments.</p>
-    <p>Every memory, every laugh,   every stolen glance is so special </p>
+    <p>Every memory, every laugh, every stolen glance is so special </p>
     <p> ... </p>
     
     <div class="scroll-indicator">⬇️</div>
