@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Our Special Day</title>
-
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
 
@@ -13,6 +12,23 @@ body {
   background:#000;
   color:#fff;
   overflow-x:hidden;
+  height: 100vh;
+}
+
+/* Floating hearts */
+.emoji {
+  position: fixed;
+  font-size: 30px;
+  opacity: 0.7;
+  animation: float 20s linear infinite;
+  pointer-events: none;
+  z-index: 2;
+}
+
+@keyframes float {
+  0% { transform: translateY(100vh) scale(1) rotate(0deg); opacity:0.3; }
+  50% { opacity:0.9; }
+  100% { transform: translateY(-100vh) scale(1.2) rotate(360deg); opacity:0.3; }
 }
 
 /* Container scroll */
@@ -25,23 +41,22 @@ body {
 /* Event block */
 .event-block {
   scroll-snap-align: start;
-  min-height:100vh;
-  display:flex;
+  min-height: 100vh;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   position: relative;
-  padding:60px 40px;
-  box-sizing:border-box;
+  padding: 60px 40px;
+  text-align: center;
+  z-index: 1;
 }
-.event-block h1,
-.event-block h2 { margin-bottom:20px; text-align:center; }
+
+.event-block h1, .event-block h2 { margin-bottom: 20px; }
 .event-date { font-size:14px; opacity:0.8; margin-left:10px; }
 .poetry p { margin:6px 0; line-height:1.6; text-align:center; }
-
-/* Scroll indicator */
 .scroll-indicator {
-  position:absolute;
+  position: absolute;
   bottom:20px;
   width:100%;
   text-align:center;
@@ -49,29 +64,98 @@ body {
   font-size:18px;
 }
 
-/* First & Last Page */
+/* First & Last Page Background */
 .event-block.first-last {
-  background:#ff577f;
   overflow:hidden;
-  position:relative;
+  position: relative;
 }
 
-/* Background image with 125% zoom */
 .event-block.first-last::before {
   content:"";
   position:absolute;
-  inset:0;
+  top:0; left:0; right:0; bottom:0;
   background: url("background.jpg") center / 125% auto no-repeat;
   opacity:0.25;
   z-index:0;
 }
 
-/* Keep text above background */
-.event-block.first-last * { position: relative; z-index:1; }
+.event-block.first-last * {
+  position: relative;
+  z-index:1;
+}
 
-/* Floating hearts */
-.emoji {
-  position: fixed;
-  font-size: 30px;
-  opacity: 0.7;
-  animatio
+a.event-title { color:#ffd6e0; text-decoration:none; }
+a.event-title:hover { text-decoration: underline; }
+
+@media(max-width:600px){ .event-block { padding:40px 20px; } }
+</style>
+</head>
+<body>
+
+<!-- Floating hearts -->
+<script>
+for(let i=0;i<15;i++){
+  let e=document.createElement("div");
+  e.className="emoji";
+  e.style.left=Math.random()*100+"vw";
+  e.style.animationDuration=(15+Math.random()*10)+"s";
+  e.innerHTML="❤️";
+  document.body.appendChild(e);
+}
+</script>
+
+<div class="container">
+
+  <!-- First Page -->
+  <div class="event-block first-last">
+    <h1>Happy Birthday Indhu ❤️</h1>
+    <p>You are cherished, truly special,</p>
+    <p>A spark in our everyday moments.</p>
+    <p>Every memory, every laugh, every stolen glance is so special</p>
+    <p>May every visit remind you of the joy you bring.</p>
+    <div class="scroll-indicator">⬇️</div>
+  </div>
+
+  <!-- First Event -->
+  <div class="event-block">
+    <h2>
+      <a class="event-title" href="https://maps.app.goo.gl/y1ua36iZJ3gJsMLZ8" target="_blank">
+        First Date – Windmill Whispers
+      </a>
+      <span class="event-date">20 June</span>
+    </h2>
+    <div class="poetry">
+      <p>A windmill turning slow.</p>
+      <p>Our first beer.</p>
+      <p>Your eyes speaking quietly to mine.</p>
+      <p>A comfort I didn’t expect.</p>
+      <p>A spark I didn’t understand yet.</p>
+
+      <p>The bike ride after—</p>
+      <p>cool air, soft silence, shared space.</p>
+      <p>Your hand on my shoulder—warm, gentle, grounding.</p>
+      <p>A touch that stayed in my mind long after.</p>
+
+      <p>And somewhere inside,</p>
+      <p>a small wish began—</p>
+      <p>a simple side hug, someday.</p>
+
+      <p>A tiny beginning.</p>
+      <p>A quiet start.</p>
+      <p>But it was the start of us.</p>
+    </div>
+    <div class="scroll-indicator">⬇️</div>
+  </div>
+
+  <!-- Last Page -->
+  <div class="event-block first-last">
+    <h1>Forever Us 💞</h1>
+    <p>If there’s one truth my heart knows now,</p>
+    <p>it’s that you’re the warmth I return to,</p>
+    <p>the story I want to keep writing,</p>
+    <p>again, again, and always.</p>
+  </div>
+
+</div>
+</body>
+</html>
